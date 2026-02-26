@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Gun Game Adventure</title>
+
+        <link rel="stylesheet" href="layout.css">
+        
+        <!-- Libraries -->
+        <script src="library/p5.min.js"></script>
+        <script src="library/p5.dom.min.js"></script>
+        <script src="library/p5.sound.min.js"></script>
+
+        <!-- World -->
+        <script src="objects/World/quadtree.js"></script>
+        <script src="objects/World/worlds.js"></script>
+        <script src="objects/World/gamemap.js"></script>
+        <script src="objects/World/viewport.js"></script>
+        <script src="objects/World/tree.js"></script>
+        <script src="objects/World/rock.js"></script>
+        <script src="objects/World/barrel.js"></script>
+        <script src="objects/World/water.js"></script>
+        <script src="objects/World/ice.js"></script>
+        <script src="objects/World/item.js"></script>
+        <script src="objects/World/name.js"></script>
+        <script src="objects/World/music.js"></script>
+        <script src="objects/World/notification.js"></script>
+        
+        <!-- Weapons -->
+        <script src="objects/Weapons/effects.js"></script>
+        <script src="objects/Weapons/explorePoint.js"></script>
+        <script src="objects/Weapons/redzone.js"></script>
+        <script src="objects/Weapons/portal.js"></script>
+        <script src="objects/Weapons/smoke.js"></script>
+        <script src="objects/Weapons/bullet.js"></script>
+        <script src="objects/Weapons/gun.js"></script>
+        <script src="objects/Weapons/weapons.js"></script>
+        <script src="objects/Weapons/infoWeapon.js"></script>
+        
+        <!-- Character -->
+        <script src="objects/Character/Team.js"></script>
+        <script src="objects/Character/character.js"></script>
+        <script src="objects/Character/AI_Character.js"></script>
+        <script src="objects/Character/Player.js"></script>
+        <script src="objects/Character/Boss.js"></script>
+        
+        <!-- Main -->
+        <script src="functions.js"></script>
+        <script src="sketch.js"></script>
+        <!-- <script src="min/min.js"></script> -->
+    </head>
+ <body>
+    <a href="http://www.cutercounter.com/" target="_blank"><img src="http://www.cutercounter.com/hit.php?id=guvapoox&nd=7&style=8" border="0" alt="hit counter"></a>
+    <a href="http://www.cutercounter.com/" target="_blank"><img src="http://www.cutercounter.com/hit.php?id=gvmapook&nd=7&style=8" border="0" alt="free counter"></a>
+
+    <div id="alert">
+        <span id="closebtn">&otimes;</span>
+    </div>
+
+    <div class="overlay">
+        <div class="menu squid-card">
+            <div class="squid-header">
+                <div class="shapes">○ △ □</div>
+                <h1>SQUID GAME</h1>
+                <p>PLAYER REGISTRATION</p>
+            </div>
+
+            <hr>
+
+            <div class="registration-section">
+                <label for="ip-name">ASSIGN PLAYER NAME:</label>
+                <input type="text" id="ip-name" placeholder="Enter Name/Number...">
+                
+                <div class="color-section">
+                    <span>UNIFORM TINT:</span>
+                    <div id="color-picker-wrapper">
+                        <input type="color" value="#004d40" id="pickColor">
+                    </div>
+                </div>
+            </div>
+
+            <label for="worlds-select">SELECT ARENA:</label>
+            <select id="worlds-select">
+                <option value="">Random Arena</option>
+                <option value="flat">The Courtyard (Flat)</option>
+                <option value="normal">The Training Ground</option>
+                <option value="beach">The Island (Beach)</option>
+                <option value="jungle">The Forest (Jungle)</option>
+                <option value="winter">Red Light, Green Light (Winter)</option>
+                <option value="mountain">The Glass Bridge (Mountain)</option>
+                <option value="barrel">Oil Storage (Barrel)</option>
+            </select>
+
+            <div class="button-group">
+                <button id="solo" class="btn-play green">START SOLO GAME</button>
+                <div class="gr-btn">
+                    <button id="duo" class="btn-play item green">DUO</button>
+                    <button id="squad" class="btn-play item green">SQUAD</button>
+                    <button class="btn-play item blue">JOIN TEAM</button>
+                    <button class="btn-play item blue">CREATE TEAM</button>
+                </div>
+            </div>
+
+            <div class="leaderboard">
+                <h3>LIVE RANKINGS</h3>
+                <div class="leaderboard-entry"><span>#456 Gi-hun</span> <span>45.6B ₩</span></div>
+                <div class="leaderboard-entry"><span>#218 Sang-woo</span> <span>20.1B ₩</span></div>
+                <div class="leaderboard-entry"><span>#067 Sae-byeok</span> <span>15.2B ₩</span></div>
+                <div class="leaderboard-entry"><span>#001 Il-nam</span> <span>??.?B ₩</span></div>
+            </div>
+
+            <button id="cachchoi" class="btn-play gray">HOW TO SURVIVE</button>
+            
+            <div class="guide">
+                <p><b><i>Move, Collect, Kill, Survive</i></b></p>
+                <p><b>MOVE</b>: WASD / Arrows</p>
+                <p><b>SHOOT</b>: Left Click</p>
+                <p><b>RELOAD</b>: R | <b>PICKUP</b>: F</p>
+                <p><b>SHIELD</b>: E</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="chatBox">
+        <div id="conversation"></div>
+        <div id="typing">
+            <input id="inputMes" type="text" placeholder="Enter message...">
+            <input id="showHideChat" type="submit" name="Hide" value="Hide">
+        </div>
+    </div>
+
+    <div id="menuWhenDie">
+        <input id="newGame" type="submit" value="TRY AGAIN">
+        <input id="backToStartMenu" type="submit" value="MENU">
+        <input id="watch" type="submit" value="WATCH">
+    </div>
+
+    <table class="custom_weapons" id="tbCustomWeapon">
+        <tr><th colspan="2" id="nameWeapon">UPGRADE WEAPON</th></tr>
+        <tr><td><p>Ammo Capacity:</p></td><td><input type="number" id="maxBulls"></td></tr>
+        <tr><td><p>Fire Rate:</p></td><td><input type="number" id="delay"></td></tr>
+        <tr><td><p>Damage:</p></td><td><input type="number" id="damage"></td></tr>
+        <tr><td colspan="2">
+            <button class="green" onclick="applyCustomWeapons()">APPLY</button>
+            <button onclick="customWeapon('switch')">CANCEL</button>
+        </td></tr>
+    </table>
+</body>
+</html>

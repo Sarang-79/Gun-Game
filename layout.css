@@ -1,0 +1,254 @@
+* {
+    font-family: 'Courier New', Courier, monospace; /* More industrial/mechanical feel */
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000; /* Deep black background */
+    margin: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow-x: hidden;
+}
+
+/* Base Squid Game Colors */
+:root {
+    --squid-pink: #ed1b76;
+    --squid-teal: #004d40;
+    --squid-light-teal: #03bb85;
+    --squid-dark: #1a1a1a;
+}
+
+/* ========= ScrollBar (Themed) ============ */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--squid-pink);
+    border-radius: 0px;
+}
+
+/* ========= Curtain Menu / Overlay ========= */
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('objects/bg.png');
+    background-size: cover;
+    overflow-y: auto; /* Enable scrolling for the whole menu */
+    display: block;
+    padding: 50px 0; /* Space for scrolling */
+}
+
+.menu {
+    position: relative;
+    width: 380px;
+    height: auto; 
+    min-height: 400px;
+    margin: 0 auto;
+    /* --- Changed to White --- */
+    background-color: #ffffff; 
+    padding: 30px;
+    /* Kept the iconic pink border */
+    border: 4px solid #ed1b76; 
+    border-radius: 0; 
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+}
+
+/* We also need to change the text color to black/dark so it's readable on white */
+.menu h1, 
+.menu p, 
+.menu label,
+.leaderboard-entry {
+    color: #1a1a1a !important;
+}
+
+/* Keep the shapes and certain headers pink for the theme */
+.shapes, .menu h1, .leaderboard h3 {
+    color: #ed1b76 !important;
+}
+
+/* Update the input fields to look better on a white background */
+.menu input[type="text"], .menu select {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+}
+
+/* ========= Registration & Inputs ========= */
+.menu input[type="text"] {
+    display: block;
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    font-size: 1.1em;
+    padding: 12px;
+    border: 1px solid var(--squid-light-teal);
+    outline: none;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#color-picker-wrapper {
+    display: block;
+    margin: 10px auto 20px auto;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+}
+
+.menu input[type="color"] {
+    transform: scale(3);
+    cursor: pointer;
+}
+
+.menu select {
+    display: block;
+    color: var(--squid-light-teal);
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    border: 2px solid var(--squid-light-teal);
+    background-color: #000;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+/* ========= Buttons ========= */
+.btn-play {
+    border: none;
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 15px 0;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.green { background-color: var(--squid-teal); }
+.blue  { background-color: #1a1a1a; border: 1px solid var(--squid-pink); }
+.gray  { background-color: #333; }
+
+.green:hover { background-color: var(--squid-light-teal); transform: scale(1.02); }
+.blue:hover  { background-color: var(--squid-pink); }
+
+.gr-btn {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.item { width: 48%; }
+
+/* ========= Leaderboard & Extra Sections ========= */
+.leaderboard {
+    margin: 20px 0;
+    padding: 10px;
+    background: #0f0202;
+    border: 1px dashed var(--squid-pink);
+    /* This ensures all general text in the box is white */
+    color: #ffffff; 
+}
+
+/* Specifically targeting the entries to ensure they don't 
+   inherit darker colors from other parts of your CSS */
+.leaderboard-entry, 
+.leaderboard-entry span {
+    color: #ffffff !important;
+}
+
+/* Optional: Keep the "LIVE RANKINGS" title pink for the Squid Game theme */
+.leaderboard h3 {
+    color: var(--squid-pink);
+    margin-top: 0;
+}
+.leaderboard h3 {
+    color: var(--squid-pink);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.leaderboard-entry {
+    display: flex;
+    justify-content: space-between;
+    color: #ccc;
+    font-size: 0.8em;
+    padding: 4px 0;
+    border-bottom: 1px solid #222;
+}
+
+/* ========= Guide Section ========= */
+.guide {
+    margin-top: 20px;
+    background-color: #0f0202; /* Matching the leaderboard background */
+    border: 1px dashed var(--squid-pink); /* Matching the leaderboard border */
+    padding: 10px;
+}
+
+.guide p {
+    margin: 5px 0;
+    color: #ffffff !important; /* Forces text to white */
+    font-size: 0.9em;
+}
+
+.guide b {
+    color: var(--squid-pink); /* Keeps keys/important labels Pink */
+}
+
+/* ========= UI Elements (Death Menu / Chat) ========= */
+#menuWhenDie {
+    z-index: 100;
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    border: 2px solid var(--squid-pink);
+}
+
+#menuWhenDie input {
+    background-color: var(--squid-pink);
+    color: white;
+    margin: 5px;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+}
+
+#chatBox {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 2px solid var(--squid-light-teal);
+}
+
+/* ============= Custom_weapons (Table) ============= */
+.custom_weapons {
+    background-color: var(--squid-dark);
+    border: 2px solid var(--squid-pink);
+}
+
+.custom_weapons th {
+    background-color: var(--squid-pink);
+}
+
+.custom_weapons input {
+    background: #000;
+    color: var(--squid-light-teal);
+    border: 1px solid #444;
+}
